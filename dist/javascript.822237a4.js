@@ -490,4 +490,4 @@ var Player = /*#__PURE__*/function () {
 
 window.p = new Player('#player');
 },{"./icons.js":"MUcg","./swiper.js":"OCOi"}]},{},["EWR2"], null)
-//# sourceMappingURL=/javascript.822237a4.js.map
+//# sourceMappingURL=javascript.822237a4.js.map
