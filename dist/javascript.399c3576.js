@@ -491,4 +491,4 @@ var Player = /*#__PURE__*/function () {
 
 window.p = new Player('#player');
 },{"./icons.js":"MUcg","./swiper.js":"OCOi"}]},{},["EWR2"], null)
-//# sourceMappingURL=/javascript.399c3576.js.map
+//# sourceMappingURL=javascript.399c3576.js.map
