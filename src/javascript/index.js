@@ -21,7 +21,8 @@ class Player {
     }
 
     start() {
-        fetch('https://jirengu.github.io/data-mock/huawei-music/music-list.json')
+        // fetch('https://jirengu.github.io/data-mock/huawei-music/music-list.json')
+        fetch('https://axdo.github.io/data-mock//huali-music/music-list.json')
             .then(res => res.json())
             .then(data => {
 
