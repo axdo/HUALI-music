@@ -4,7 +4,17 @@ import Swiper from './swiper.js'
 
 const $ = selector => document.querySelector(selector)
 const $$ = selector => document.querySelectorAll(selector)
-
+if (document.documentElement.clientWidth > 500) {
+    window.alert('请使用手机打开本页面，以保证浏览效果');
+    const img = document.createElement('img');
+    img.src = require('../image/musicqrcode.png');
+    img.style.position = 'fixed';
+    img.style.left = '35%';
+    img.style.top = '51%';
+    img.style.transform = 'translateX(-40%,50%)';
+    img.style.boxShadow = '0 0 10px rgba(0,0,0,0.25)';
+    document.body.appendChild(img)
+}
 class Player {
     constructor(node) {
         this.root = typeof node === 'string' ? document.querySelector(node) : node
@@ -76,11 +86,17 @@ class Player {
             console.log('left')
             this.classList.remove('panel1')
             this.classList.add('panel2')
+            document.querySelector('#ball-right').classList.add('current')
+            document.querySelector('#ball-left').classList.remove('current')
+
         })
         swiper.on('swiperRight', function () {
             console.log('right')
             this.classList.remove('panel2')
             this.classList.add('panel1')
+            document.querySelector('#ball-left').classList.add('current')
+            document.querySelector('#ball-right').classList.remove('current')
+
         })
     }
 
