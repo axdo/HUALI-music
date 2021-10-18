@@ -134,6 +134,7 @@ $color3:#0025f1;
 
     .footer{
         height: 160px;
+        // position: relative;
         .buttons{
             display: flex;
             justify-content: center;
@@ -188,6 +189,20 @@ $color3:#0025f1;
                     }
                 }
             }
+
+            #song-list{
+                li{
+                    list-style: none;
+                    border-bottom: 0.1px solid rgba(255,255,255,0.5);
+                }
+                position: absolute;
+                font-size: 15px;
+                color: white;
+                left: 70%;
+                top: 65%;
+                background: rgba(0,0,0,0.3);
+                // border: 0.5px solid rgba(255,255,255,0.5)
+            }
         }
 
         .actions{
@@ -207,6 +222,8 @@ $color3:#0025f1;
                 }
             }
         }
+
+        
     }
 }
 

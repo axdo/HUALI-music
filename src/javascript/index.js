@@ -21,6 +21,7 @@ class Player {
         this.$ = selector => this.root.querySelector(selector)
         this.$$ = selector => this.root.querySelectorAll(selector)
         this.songList = []
+        this.songTitle = []//歌名列表
         this.currentIndex = 0
         this.audio = new Audio()
         this.lyricsArr = []
@@ -35,13 +36,46 @@ class Player {
         fetch('https://axdo.github.io/data-mock//huali-music/music-list.json')
             .then(res => res.json())
             .then(data => {
-
                 console.log(data)
                 this.songList = data
+                this.songTitle = data.map(song=>song.title)
+                this.loadTitle()
                 this.loadSong()
-
+                // this.liBind()
             })
     }
+
+    //加载歌名 有问题点击没反应 点到最下面提示没有playSong方法
+    loadTitle(){
+        let self = this
+        for(let i = 0;i<this.songTitle.length;i++){
+            let title = document.createElement('li')
+            title.classList.add('song-name#'+i)
+            //需要把文本设置在li节点里，否则就会出现<li></li>歌名，可能会影响绑定点击事件
+            title.innerText = this.songTitle[i]
+            // this.$('#song-list').append(this.songTitle[i],title)
+            this.$('#song-list').append(title)
+        }
+        this.$('#song-list').style.visibility = 'hidden'
+        //事件委托
+        this.$('#song-list').onclick = function(e){
+            // console.log(e.target.classList[0].split('#')[1])
+            // console.log(self);
+            self.currentIndex = e.target.classList[0].split('#')[1]
+            self.loadSong()
+            
+            //改变图标
+            document.querySelector('.btn-play-pause').classList.add('playing')
+            document.querySelector('.btn-play-pause').classList.remove('pause')
+            document.querySelector('.btn-play-pause').querySelector('use').setAttribute('xlink:href', '#icon-pause')
+            
+            self.playSong()
+        }
+        
+        
+    }
+
+    
 
     bind() {
         let self = this;
@@ -61,6 +95,12 @@ class Player {
             // self.playSong()
         }
 
+        //重新播放
+        this.$('.btn-order').onclick = function(){
+            self.loadSong()
+            self.playSong()
+        }
+
         this.$('.btn-pre').onclick = function () {
             // self.playPreSong()
             self.currentIndex = (self.songList.length + self.currentIndex - 1) % self.songList.length
@@ -73,6 +113,19 @@ class Player {
             self.loadSong()
             self.playSong()
         }
+
+        //查看歌名列表
+        this.$('.btn-music-list').onclick = function(){
+            let button = document.querySelector('#song-list')
+            console.log('hi')
+            button.style.visibility === 'hidden'? button.style.visibility = 'visible': button.style.visibility = 'hidden'
+            // if(this.$('#song-title').style.visibility === 'hidden'){
+            //     this.$('#song-title').style.visibility = 'visible'
+            // } else
+        }
+
+        
+
 
         this.audio.ontimeupdate = function () {
             console.log(parseInt(self.audio.currentTime * 1000))
